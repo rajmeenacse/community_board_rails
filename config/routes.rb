@@ -10,6 +10,14 @@ CommunityBoard::Application.routes.draw do
     end
   end
 
+  namespace "api" do
+    namespace "v1" do
+      resources :community do
+        resources :posts
+      end
+    end
+  end
+
   scope '/favourite' do
     resources :posts
   end
