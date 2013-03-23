@@ -1,4 +1,5 @@
 class Api::V1::PostsController < ApplicationController
+doorkeeper_for :create
   respond_to :json
 
   def index
