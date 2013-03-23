@@ -8,8 +8,16 @@ doorkeeper_for :create
     respond_with @posts
   end
 
-def current_resource_owner
-  User.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
-end
+  def create
+    @post = @community.posts.build(post_params)
+    @post.user = current_resource_owner
+    @post.save
+    respond_with @post, location: nil
+  end
 
+  private
+
+  def post_params
+    params.require(:post).permit(:text)
+  end
 end
